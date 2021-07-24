@@ -1,9 +1,19 @@
 import React from 'react'
 import NavbarStyles from './NavbarStyles'
 import { AccountCircle, Menu, Search } from '@material-ui/icons'
+import Switch from '@material-ui/core/Switch';
 
 
 export default function Navbar() {
+
+    const [state, setState] = React.useState({
+        checkedTheme: false,
+      });
+    
+      const handleChange = (event) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+      };
+
     return (
         <NavbarStyles>
             
@@ -27,6 +37,7 @@ export default function Navbar() {
                         />
 
                         <input
+                            disabled
                             type="text"
                             placeholder="Search..."
                         />
@@ -39,6 +50,17 @@ export default function Navbar() {
                 <div className="navbar__right">
 
                     <div className="navbar__theme">
+
+                        <Switch
+                            disabled
+                            checked={state.checkedTheme}
+                            onChange={handleChange}
+                            color="default"
+                            name="checkedTheme"
+                            inputProps={{ 'aria-label': 'Dark mode' }}
+                        />
+
+                        <label htmlFor="checkedTheme">Dark mode</label>
 
                     </div>
 

@@ -11,7 +11,9 @@ const NavbarStyles = styled.div`
     .navbar__left,
     .navbar__right,
     .navbar__menu,
-    .navbar__search {
+    .navbar__search,
+    .navbar__theme,
+    .navbar__account {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -57,6 +59,17 @@ const NavbarStyles = styled.div`
                 outline: none;
             }
         }
+    }
+
+    .navbar__theme {
+        label {
+            margin-right: .5rem;
+            font-size: 15px;
+        }
+    }
+
+    .navbar__account {
+        margin-right: .3rem;
     }
 
 `;
