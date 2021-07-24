@@ -3,8 +3,10 @@ import styled from 'styled-components'
 const NavbarStyles = styled.div`
 
     *{
+        --navbar-font-color: #fff;
         --input-purple-dark: #630063;
         --input-purple-light: #8a1d8a;
+        --input-placeholder: #c7c7c7;
     }
 
     .navbar__wrapper,
@@ -27,7 +29,7 @@ const NavbarStyles = styled.div`
 
     .navbar__wrapper {
         background-color: purple;
-        color: white;
+        color: var(--navbar-font-color);
         position: fixed;
         width: 100%;
         height: 50px;
@@ -49,10 +51,10 @@ const NavbarStyles = styled.div`
             background-color: var(--input-purple-dark);
             border-style: none;
             width: 100%;
-            color: white;
+            color: var(--navbar-font-color);
             margin: 0 .3rem;
             ::placeholder {
-                color: #c7c7c7;
+                color: var(--input-placeholder);
             }
             &:focus {
                 background-color: var(--input-purple-light);
