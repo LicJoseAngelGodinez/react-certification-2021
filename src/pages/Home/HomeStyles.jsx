@@ -2,6 +2,11 @@ import styled from "styled-components";
 
 const HomeStyles = styled.section`
 
+  * {
+    --card-description: gray;
+    --card-hover: #f5f5ff;
+  }
+
   .homepage__wrapper {
     display: flex;
     flex-direction: column;
@@ -45,6 +50,7 @@ const HomeStyles = styled.section`
     box-shadow: 0 0 6px rgba(0, 0, 0, .5);
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     img {
       height: 165px;
       border-radius: 14px 14px 0 0;
@@ -56,8 +62,12 @@ const HomeStyles = styled.section`
       padding: 1.3rem  1.3rem 0 1.3rem;
     }
     .videocard__desc {
-      color: gray;
+      color: var(--card-description);
       padding: 0 1.3rem;
+    }
+    :hover{
+      background-color: var(--card-hover);
+      box-shadow: 0 0 10px rgba(83, 51, 237, 1);
     }
   }
 
