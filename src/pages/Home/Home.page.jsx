@@ -7,6 +7,8 @@ import VideoCard from '../../components/VideoCard/VideoCard';
 function HomePage() {
   const sectionRef = useRef(null);
 
+  const videoData = youtubeData.items.filter( (video) => video.id.videoId );
+
   return (
 
       <HomeStyles className="homepage" ref={sectionRef}>
@@ -23,7 +25,7 @@ function HomePage() {
           <div className="homepage__content">
 
             {
-              youtubeData.items.map((video) => (
+             videoData.map((video) => (
                 <VideoCard
                   key={uuidv4()}
                   imgUrl={video.snippet.thumbnails.high.url}
