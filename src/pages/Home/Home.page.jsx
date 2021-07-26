@@ -15,11 +15,7 @@ function HomePage() {
 
         <div className="homepage__wrapper">
 
-          <div className="homepage__title">
-
-            Welcome to the Challenge!
-
-          </div>
+          <div className="homepage__title">Welcome to the Challenge!</div>
 
 
           <div className="homepage__content">
