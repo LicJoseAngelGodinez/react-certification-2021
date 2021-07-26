@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const HomeStyles = styled.section`
 
@@ -34,12 +34,8 @@ const HomeStyles = styled.section`
     gap: 1.5em;
     margin-top: auto;
     
-    @media(min-width: 950px) and (max-width: 1200px) {
+    @media(min-width: 100px) and (max-width: 1200px) {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-    
-    @media (max-width: 949px) {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
   }
 
