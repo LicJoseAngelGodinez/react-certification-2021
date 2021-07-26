@@ -1,20 +1,14 @@
 import React from 'react'
-import VideoCardStyles from './VideoCardStyles'
 
-const VideoCard = (props) => {
-  const { imgUrl, title, description} = props;
+const VideoCard = ({ imgUrl, title, description}) => {
   return (
-    <VideoCardStyles className="videocard__wrapper">
-
+    <div className="videocard__wrapper">
       <img src={imgUrl} alt="" />
-
       <label htmlFor="" className="videocard__title">{title}</label>
-
       <p className="videocard__desc">
         {description}
       </p>
-
-    </VideoCardStyles>
+    </div>
   )
 }
 
