@@ -6,8 +6,8 @@ import HomePage from '../../pages/Home';
 import LoginPage from '../../pages/Login';
 import NotFound from '../../pages/NotFound';
 import SecretPage from '../../pages/Secret';
+import Navbar from '../Navbar/Navbar';
 import Private from '../Private';
-import Fortune from '../Fortune';
 import Layout from '../Layout';
 import { random } from '../../utils/fns';
 
@@ -33,6 +33,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <Navbar/>
         <Layout>
           <Switch>
             <Route exact path="/">
@@ -48,7 +49,6 @@ function App() {
               <NotFound />
             </Route>
           </Switch>
-          <Fortune />
         </Layout>
       </AuthProvider>
     </BrowserRouter>

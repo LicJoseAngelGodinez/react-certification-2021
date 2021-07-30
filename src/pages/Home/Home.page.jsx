@@ -1,38 +1,32 @@
-import React, { useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-
-import { useAuth } from '../../providers/Auth';
-import './Home.styles.css';
+import React, { useRef } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import HomeStyles from './HomeStyles'
+import youtubeData from '../../data/youtube-videos-mock.json'
+import VideoCard from '../../components/VideoCard/VideoCard'
 
 function HomePage() {
-  const history = useHistory();
   const sectionRef = useRef(null);
-  const { authenticated, logout } = useAuth();
 
-  function deAuthenticate(event) {
-    event.preventDefault();
-    logout();
-    history.push('/');
-  }
+  const videoData = youtubeData.items.filter( (video) => video.id.videoId );
 
   return (
-    <section className="homepage" ref={sectionRef}>
-      <h1>Hello stranger!</h1>
-      {authenticated ? (
-        <>
-          <h2>Good to have you back</h2>
-          <span>
-            <Link to="/" onClick={deAuthenticate}>
-              ← logout
-            </Link>
-            <span className="separator" />
-            <Link to="/secret">show me something cool →</Link>
-          </span>
-        </>
-      ) : (
-        <Link to="/login">let me in →</Link>
-      )}
-    </section>
+    <HomeStyles className="homepage" ref={sectionRef}>
+      <div className="homepage__wrapper">
+          <div className="homepage__title">
+            Hello World!
+          </div>
+          <div className="homepage__content">
+            { videoData.map((video) => (
+                <VideoCard
+                  key={uuidv4()}
+                  imgUrl={video.snippet.thumbnails.high.url}
+                  title={video.snippet.title}
+                  description={video.snippet.description}
+                />
+            ))}
+          </div>
+      </div>
+    </HomeStyles>
   );
 }
 
