@@ -1,14 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
+import { DataContext } from '../../Context/AppContext'
 import { v4 as uuidv4 } from 'uuid'
 import HomeStyles from './HomeStyles'
-import youtubeData from '../../data/youtube-videos-mock.json'
 import VideoCard from '../../components/VideoCard/VideoCard'
 
 function HomePage() {
   const sectionRef = useRef(null);
 
-  const videoData = youtubeData.items.filter( (video) => video.id.videoId );
-
+  const { videoData } = useContext(DataContext);
+  
   return (
     <HomeStyles className="homepage" ref={sectionRef}>
       <div className="homepage__wrapper">
@@ -19,6 +19,7 @@ function HomePage() {
             { videoData.map((video) => (
                 <VideoCard
                   key={uuidv4()}
+                  id={video.id.videoId}
                   imgUrl={video.snippet.thumbnails.high.url}
                   title={video.snippet.title}
                   description={video.snippet.description}

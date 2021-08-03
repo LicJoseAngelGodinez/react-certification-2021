@@ -5,7 +5,7 @@ import NavbarSearch from './Components/NavbarSearch'
 import NavbarThemeSwitch from './Components/NavbarThemeSwitch'
 import NavbarSessionButton from './Components/NavbarSessionButton'
 
-export default function Navbar() {    
+export default function Navbar() {
 
     return (
         <NavbarStyles>
