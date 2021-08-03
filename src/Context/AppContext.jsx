@@ -1,6 +1,7 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react'
+import { API_KEY } from '../utils/constants'
 
-const KEY = process.env.REACT_APP_API_KEY;
+const KEY = API_KEY;
 
 // The Context 
 const DataContext = React.createContext({});
