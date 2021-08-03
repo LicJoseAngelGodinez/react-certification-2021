@@ -3,8 +3,9 @@ import React, { useContext } from 'react'
 import { Search } from '@material-ui/icons'
 import { DataContext } from '../../../Context/AppContext'
 import { useHistory } from 'react-router-dom'
+import { API_KEY } from '../../../utils/constants';
 
-const KEY = process.env.REACT_APP_API_KEY;
+const KEY = API_KEY;
 
 const NavbarSearch = () => {
 
