@@ -60,6 +60,7 @@ const HomeStyles = styled.section`
     .videocard__desc {
       color: var(--card-description);
       padding: 0 1.3rem;
+      overflow-wrap: break-word;
     }
     :hover{
       background-color: var(--card-hover);
