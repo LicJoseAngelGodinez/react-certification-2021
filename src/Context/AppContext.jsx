@@ -1,5 +1,7 @@
 import React, { useState, useLayoutEffect } from 'react'
-import { API_KEY } from '../utils/constants'
+import { API_KEY, API_URL_YOUTUBE } from '../utils/constants'
+import { processQueryParams, createQueryParams, processVideoResponse } from '../utils/utils'
+import { fetchVideos } from '../services/videosServices'
 
 const KEY = API_KEY;
 
@@ -12,52 +14,41 @@ const DataProvider = ({children}) => {
     const [videoData, setVideoData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    useLayoutEffect(() => {
+    useLayoutEffect( () => {
 
-        function processQueryParams (params) {
-            let result = "?";
-            for (let i = 0; i < params.length; i++) {
-                let param = params[i],
-                    connector = i === 0 ? '' : '&';
-                result += `${connector}${param.field}=${param.value}`;
-            }
-            return result;
-        };
+        const getVideos = async (url) => {
+            return await fetchVideos(url);
+        }
 
-        let url = new URL('https://content-youtube.googleapis.com/youtube/v3/search'),
-            params = [
-                { field: "q", value: searchTerm },
-                { field: "part", value: "id" },
-                { field: "part", value: "snippet" },
-                { field: "maxResults", value: 25 },
-                { field: "type", value: "video" },
-                { field: "key", value: KEY },
-            ];
-        url.search = processQueryParams(params);
+        let url = new URL(API_URL_YOUTUBE);
+        url.search = processQueryParams(createQueryParams({value: searchTerm, key: KEY}));
     
         if (isLoading) {
-            fetch(url, {
-                method: 'GET'
-            }).then(function (response) {
-                // The API call was successful!
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return Promise.reject(response);
-                }
-            }).then(function (dataResponse) {
-                // This is the JSON from our response
-                let resData = [];
+            setIsLoading(false);
+            const videos = getVideos(url);
+            setVideoData(processVideoResponse(videos.items));
+            // fetch(url, {
+            //     method: 'GET'
+            // }).then(function (response) {
+            //     // The API call was successful!
+            //     if (response.ok) {
+            //         return response.json();
+            //     } else {
+            //         return Promise.reject(response);
+            //     }
+            // }).then(function (dataResponse) {
+            //     // This is the JSON from our response
+            //     let resData = [];
             
-                if ( dataResponse.items.length > 0 ) {
-                    resData = dataResponse.items.filter( (video) => video.id.videoId );
-                }
-                setIsLoading(false);
-                setVideoData(resData);
-            }).catch(function (err) {
-                // There was an error
-                console.warn('Something went wrong.', err);
-            });
+            //     if ( dataResponse.items.length > 0 ) {
+            //         resData = dataResponse.items.filter( (video) => video.id.videoId );
+            //     }
+            //     setIsLoading(false);
+            //     setVideoData(resData);
+            // }).catch(function (err) {
+            //     // There was an error
+            //     console.warn('Something went wrong.', err);
+            // });
         }
     })
 
