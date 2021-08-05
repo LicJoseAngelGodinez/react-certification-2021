@@ -28,3 +28,11 @@ export const createQueryParams = ({value, key}) => {
 export const processVideoResponse = (videos) => {  
   return videos.filter( (video) => video.id.videoId );
 };
+
+export const removeSelectedVideo = ({videos, id}) => {
+  return videos.filter( (video) => video.id.videoId && video.id.videoId !== id);
+};
+
+export const getVideoData = ({videos, id}) => {
+  return videos.find( (video) => video.id.videoId && video.id.videoId === id )
+};
