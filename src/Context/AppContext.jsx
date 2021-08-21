@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from 'react'
-import { API_KEY } from '../utils/constants'
 
-const KEY = API_KEY;
+const KEY = process.env.REACT_APP_API_KEY;
+const YOUTUBE_URL = process.env.REACT_APP_YOUTUBE_SEARCH;
 
 // The Context 
 const DataContext = React.createContext({});
@@ -24,7 +24,7 @@ const DataProvider = ({children}) => {
             return result;
         };
 
-        let url = new URL('https://content-youtube.googleapis.com/youtube/v3/search'),
+        let url = new URL(YOUTUBE_URL),
             params = [
                 { field: "q", value: searchTerm },
                 { field: "part", value: "id" },

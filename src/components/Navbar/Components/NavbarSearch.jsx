@@ -3,9 +3,9 @@ import React, { useContext } from 'react'
 import { Search } from '@material-ui/icons'
 import { DataContext } from '../../../Context/AppContext'
 import { useHistory } from 'react-router-dom'
-import { API_KEY } from '../../../utils/constants';
 
-const KEY = API_KEY;
+const KEY = process.env.REACT_APP_API_KEY;
+const YOUTUBE_URL = process.env.REACT_APP_YOUTUBE_SEARCH;
 
 const NavbarSearch = () => {
 
@@ -29,7 +29,7 @@ const NavbarSearch = () => {
       let { value } = event.target;
       setSearchTerm(value);
 
-      let url = new URL('https://content-youtube.googleapis.com/youtube/v3/search'),
+      let url = new URL(YOUTUBE_URL),
           params = [
             { field: "q", value: value },
             { field: "part", value: "id" },
