@@ -7,7 +7,7 @@ import VideoCard from '../../components/VideoCard/VideoCard'
 function HomePage() {
   const sectionRef = useRef(null);
 
-  const { videoData } = useContext(DataContext);
+  const { videos } = useContext(DataContext);
   
   return (
     <HomeStyles className="homepage" ref={sectionRef}>
@@ -16,7 +16,7 @@ function HomePage() {
             Hello World!
           </div>
           <div className="homepage__content">
-            { videoData.map((video) => (
+            { videos.map((video) => (
                 <VideoCard
                   key={uuidv4()}
                   id={video.id.videoId}

@@ -3,26 +3,27 @@ import { DataContext } from '../../Context/AppContext'
 import { useRouteMatch } from 'react-router-dom'
 import VideoDetailStyles from './VideoDetailStyles'
 import VideoCard from '../../components/VideoCard/VideoCard'
+import { removeSelectedVideo, getVideoData } from '../../utils/utils'
 import { v4 as uuidv4 } from 'uuid'
 
 function VideoDetail () {
 
-  const {
-    params: { id },
-  } = useRouteMatch('/:id');
+  const { params: { id } } = useRouteMatch('/:id');
 
-  const { videoData } = useContext(DataContext);  
-  
-  let vdDataTEmp = videoData.length > 0 ? videoData.find((video) => video.id.videoId === id) : {};
+  const { videos } = useContext(DataContext);
 
-  let vData = !!(vdDataTEmp) ? {
+  if ( videos.length === 0 ) return;
+  const vdDataTEmp = getVideoData({videos, id});
+  const videosList = removeSelectedVideo({videos, id});
+
+  const vData = !!(vdDataTEmp) ? {
     videoUrl: `https://www.youtube.com/embed/${id}`,
-    list: videoData,
+    list: videosList,
     title: vdDataTEmp.snippet.title,
     description: vdDataTEmp.snippet.description
   } : {
     videoUrl: ``,
-    list: videoData,
+    list: videos,
     title: ``,
     description: ``
   };
