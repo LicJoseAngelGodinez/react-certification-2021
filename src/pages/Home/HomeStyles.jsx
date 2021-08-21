@@ -56,6 +56,7 @@ const HomeStyles = styled.section`
     .videocard__title {
       font-size: 1.5rem;
       padding: 1.3rem  1.3rem 0 1.3rem;
+      cursor: pointer;
     }
     .videocard__desc {
       color: var(--card-description);

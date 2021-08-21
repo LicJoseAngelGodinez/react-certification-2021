@@ -43,7 +43,8 @@ const VideoDetailStyles = styled.div`
     width: 95vw;
     padding-top: 2rem;
     .videocard__wrapper {
-      padding: 10px;
+      margin: .4rem;
+      border-radius: 15px;
       display: inline-flex;
       flex-direction: column;
       max-width: 15rem;

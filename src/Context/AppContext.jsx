@@ -1,74 +1,54 @@
-import React, { useState, useLayoutEffect } from 'react'
-import { API_KEY } from '../utils/constants'
+import React, { useState, useEffect } from 'react'
+import { processQueryParams, createQueryParams, processVideoResponse } from '../utils/utils'
+import { fetchVideos } from '../services/videosServices'
+import CircularIndeterminate from '../components/Loading'
+import { useHistory } from 'react-router-dom'
 
-const KEY = API_KEY;
+const KEY = process.env.REACT_APP_API_KEY;
+const YOUTUBE_URL = process.env.REACT_APP_YOUTUBE_SEARCH;
 
-// The Context 
 const DataContext = React.createContext({});
 
 const DataProvider = ({children}) => {
 
     const [searchTerm, setSearchTerm] = useState('wizeline');
-    const [videoData, setVideoData] = useState([]);
+    const [videos, setVideos] = useState([]);
+    const [videoData, setVideoData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    useLayoutEffect(() => {
+    const history = useHistory();
 
-        function processQueryParams (params) {
-            let result = "?";
-            for (let i = 0; i < params.length; i++) {
-                let param = params[i],
-                    connector = i === 0 ? '' : '&';
-                result += `${connector}${param.field}=${param.value}`;
-            }
-            return result;
-        };
-
-        let url = new URL('https://content-youtube.googleapis.com/youtube/v3/search'),
-            params = [
-                { field: "q", value: searchTerm },
-                { field: "part", value: "id" },
-                { field: "part", value: "snippet" },
-                { field: "maxResults", value: 25 },
-                { field: "type", value: "video" },
-                { field: "key", value: KEY },
-            ];
-        url.search = processQueryParams(params);
+    useEffect(() => {
+        if (!searchTerm) return;
+        async function fetchData () {
+            const url = new URL(YOUTUBE_URL);
+            url.search = processQueryParams(createQueryParams({value: searchTerm, key: KEY}));
     
-        if (isLoading) {
-            fetch(url, {
-                method: 'GET'
-            }).then(function (response) {
-                // The API call was successful!
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return Promise.reject(response);
-                }
-            }).then(function (dataResponse) {
-                // This is the JSON from our response
-                let resData = [];
-            
-                if ( dataResponse.items.length > 0 ) {
-                    resData = dataResponse.items.filter( (video) => video.id.videoId );
-                }
-                setIsLoading(false);
-                setVideoData(resData);
-            }).catch(function (err) {
-                // There was an error
-                console.warn('Something went wrong.', err);
-            });
+            const { items } = await fetchVideos(url);
+    
+            setVideoData(items);
+            setIsLoading(false);
+            history.push(`/`);
         }
-    })
+        fetchData();
+
+    }, [searchTerm, history, setIsLoading]);
+
+    useEffect(() => {
+        if (!videoData) return
+
+        const filteredVideos = processVideoResponse(videoData);
+        setVideos(filteredVideos);
+    }, [videoData])
 
     return (
         <DataContext.Provider value={{
             searchTerm,
             setSearchTerm,
-            videoData,
-            setVideoData,
+            videos,
+            setVideos,
         }}>
-            {children}
+            {isLoading ? <CircularIndeterminate/> : children }
         </DataContext.Provider>
     )
 }

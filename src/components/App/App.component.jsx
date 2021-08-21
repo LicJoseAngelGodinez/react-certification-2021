@@ -18,6 +18,7 @@ function App() {
   useLayoutEffect(() => {
     const { body } = document;
 
+
     function rotateBackground() {
       const xPercent = random(100);
       const yPercent = random(100);
