@@ -36,6 +36,9 @@ const VideoDetailStyles = styled.div`
   .vd__description {
     color: var(--card-description);
   }
+  .dark .vd__description {
+    color: white;
+  }
 
   .vd__list {
     overflow: auto;
@@ -71,6 +74,11 @@ const VideoDetailStyles = styled.div`
         box-shadow: 0 0 10px rgba(83, 51, 237, 1);
       }
     }
+  }
+
+  .videocard__wrapper.dark:hover{
+    background-color: #ba68c8;
+    box-shadow: 0 0 10px rgb(255, 234, 0);
   }
 
 

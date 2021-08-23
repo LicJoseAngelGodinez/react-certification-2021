@@ -69,6 +69,16 @@ const HomeStyles = styled.section`
     }
   }
 
+  .videocard__wrapper.dark {
+    .videocard__desc {
+      color: white;
+    }
+    :hover {
+      background-color: #565656;
+      box-shadow: 0 0 17px rgb(19, 199, 156);
+    }
+  }
+
 `;
 
 export default HomeStyles;
