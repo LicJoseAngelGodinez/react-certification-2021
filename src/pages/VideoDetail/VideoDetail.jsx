@@ -10,7 +10,7 @@ function VideoDetail () {
 
   const { params: { id } } = useRouteMatch('/:id');
 
-  const { videos } = useContext(DataContext);
+  const { videos, selectedTheme } = useContext(DataContext);
 
   if ( videos.length === 0 ) return;
   const vdDataTEmp = getVideoData({videos, id});
@@ -30,7 +30,7 @@ function VideoDetail () {
 
   return (
     <VideoDetailStyles>
-      <div className="vd__wrapper">
+      <div className={`vd__wrapper ${selectedTheme}`}>
         <div className="vd__video">
           <iframe
             width="auto"
