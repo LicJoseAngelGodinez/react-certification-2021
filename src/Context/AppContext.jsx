@@ -15,6 +15,7 @@ const DataProvider = ({children}) => {
     const [videos, setVideos] = useState([]);
     const [videoData, setVideoData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedTheme, setSelectedTheme] = useState('light');
 
     const history = useHistory();
 
@@ -42,11 +43,15 @@ const DataProvider = ({children}) => {
     }, [videoData])
 
     return (
-        <DataContext.Provider value={{
-            searchTerm,
-            setSearchTerm,
-            videos,
-            setVideos,
+        <DataContext.Provider 
+            class="tests"
+            value={{
+                searchTerm,
+                setSearchTerm,
+                videos,
+                setVideos,
+                selectedTheme,
+                setSelectedTheme,
         }}>
             {isLoading ? <CircularIndeterminate/> : children }
         </DataContext.Provider>

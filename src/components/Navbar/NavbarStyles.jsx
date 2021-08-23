@@ -35,6 +35,10 @@ const NavbarStyles = styled.div`
         height: 50px;
     }
 
+    .navbar__wrapper.dark {
+        background-color: #565656;
+    }
+
     .navbar__menu {
         margin: 0 .8rem;
     }
@@ -72,6 +76,9 @@ const NavbarStyles = styled.div`
 
     .navbar__account {
         margin-right: .3rem;
+    }
+    .dark .navbar__account {
+        color: cyan; 
     }
 
 `;
